@@ -1,0 +1,7 @@
+solution/.vs/
+solution/solution.sln
+solution/solution/*.vcxproj
+solution/solution/*.vcxproj.*
+solution/solution/x64/
+solution/x64/
+.idea/
