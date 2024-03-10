@@ -1,3 +1,3 @@
 # Spline-interpolation
 
-![Spline-interpolation](https://prnt.sc/GUebwIRxyM26)
+![Spline-interpolation](https://prnt.sc/YOQFT-TWPmQ-)
