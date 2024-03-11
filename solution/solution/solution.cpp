@@ -43,10 +43,14 @@ vector<double> solveProgonka(vector<double> d, vector<double> c, vector<double> 
 
     for (int i = N; i > 0; i--)
     {
-        double k = -e[i - 1] / d[i];
+        y[i] /= d[i];
+        d[i] = 1;
+        y[i - 1] += (y[i] * -e[i - 1]);
         e[i - 1] = 0;
-        y[i - 1] += (y[i] * k);
     }
+
+    y[0] /= d[0];
+    d[0] = 1;
 
     return y;
 }
@@ -78,18 +82,16 @@ int main()
         c[i - 1] = h / 6;
         d[i] = 2. * h / 3;
         u[i] = h / 6;
-        y[i] = (table[i + 1].second / - table[i].second) / h - (table[i].second - table[i - 1].second) / h;
+        y[i] = (table[i + 1].second - table[i].second) / h - (table[i].second - table[i - 1].second) / h;
     }
 
     vector<double> m = solveProgonka(d, c, u, y);
     int j = 1;
-    cout << "spline values with 100 nodes: \n";
     double measurement = s(a, 1, table, m);
     for (int i = 0; i <= 100; i++)
     {
         double x = a + (double)i * (b - a) / 100;
         j += (j + 1 <= N && x >= table[j].first);
-        cout << "S(" << x << "): " << s(x, j, table, m)<<'\n';
         spline << x << ' ' << s(x, j, table, m) << '\n';
         measurement = max(measurement, abs(s(x, j, table, m) - f(x)));
         measure << x << ' ' << abs(s(x, j, table, m) - f(x)) << '\n';
